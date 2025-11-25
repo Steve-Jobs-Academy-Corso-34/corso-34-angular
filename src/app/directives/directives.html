@@ -1,0 +1,103 @@
+<div class="directives-container">
+  <h2>Direttive Angular</h2>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 1. *ngIf - Mostra/Nascondi elementi                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3>*ngIf - Condizionale</h3>
+
+    <!-- Esempio base -->
+    <!-- Angular: *ngIf="showMessage" -->
+    <!-- React: {showMessage && <p>Messaggio</p>} -->
+    <button (click)="toggleMessage()">Toggle Messaggio</button>
+    <p *ngIf="showMessage" class="message">✓ Messaggio visibile!</p>
+
+    <!-- *ngIf con else -->
+    <!-- Angular: *ngIf="condition; else elseBlock" -->
+    <!-- React: {isLoggedIn ? <p>Benvenuto</p> : <p>Login</p>} -->
+    <button (click)="toggleLogin()">Toggle Login</button>
+    <p *ngIf="isLoggedIn; else notLoggedIn" class="success">✓ Sei autenticato</p>
+    <ng-template #notLoggedIn>
+      <p class="warning">⚠ Devi fare login</p>
+    </ng-template>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 2. *ngFor - Ripeti elementi                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3>*ngFor - Lista</h3>
+
+    <!-- Angular: *ngFor="let item of items; index as i" -->
+    <!-- React: {items.map((item, i) => <div key={i}>{item}</div>)} -->
+    <ul>
+      <li *ngFor="let item of items; index as i">{{ i + 1 }}. {{ item }}</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 3. [ngClass] - Classi CSS dinamiche                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3>[ngClass] - Classi dinamiche</h3>
+
+    <!-- Angular: [class.active]="isActive" -->
+    <!-- React: className={isActive ? 'active' : ''} -->
+    <button (click)="toggleActive()">Toggle Active</button>
+    <div [class.active]="isActive" class="box">Box con classe dinamica</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 4. [ngStyle] - Stili dinamici                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3>[ngStyle] - Stili dinamici</h3>
+
+    <!-- Angular: [style.color]="textColor" -->
+    <!-- React: style={{color: textColor}} -->
+    <div class="color-buttons">
+      <button (click)="changeColor('#e74c3c')">Rosso</button>
+      <button (click)="changeColor('#3498db')">Blu</button>
+      <button (click)="changeColor('#2ecc71')">Verde</button>
+    </div>
+    <p [style.color]="textColor" [style.font-size.px]="20">Testo con colore dinamico</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- Riepilogo                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section summary">
+    <h3>Riepilogo Angular vs React</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Angular</th>
+          <th>React</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>*ngIf="show"</td>
+          <td>{{ '{' }}show && &lt;div /&gt;{{ '}' }}</td>
+        </tr>
+        <tr>
+          <td>*ngIf="x; else y"</td>
+          <td>{{ '{' }}x ? &lt;A/&gt; : &lt;B/&gt;{{ '}' }}</td>
+        </tr>
+        <tr>
+          <td>*ngFor="let i of items"</td>
+          <td>{{ '{' }}items.map(i => ...){{ '}' }}</td>
+        </tr>
+        <tr>
+          <td>[class.active]="isActive"</td>
+          <td>className={{ '{' }}isActive ? 'active' : ''{{ '}' }}</td>
+        </tr>
+        <tr>
+          <td>[style.color]="color"</td>
+          <td>style={{ '{' }}{{ '{' }}color: color{{ '}' }}{{ '}' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
