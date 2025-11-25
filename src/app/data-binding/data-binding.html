@@ -1,0 +1,20 @@
+<h2>Data Binding in Angular</h2>
+
+<p>Testo statico - {{ text }} -</p>
+
+<p>Testo statico da metodo - {{ getText() }} -</p>
+
+<p>Testo dinamico - {{ getDynamicText('testo dinamico') }} -</p>
+
+<p>Somma - {{ sum(2, 3) }} -</p>
+
+<img [src]="imgLogoSrc" width="200" />
+
+<p>Path corrente: {{ imgLogoSrc }}</p>
+
+<div class="image-src-button-container">
+  <button (click)="onClick()">Spacca Immagine</button>
+  <button (click)="onReset()">Resetta Immagine</button>
+</div>
+
+<!--/* SINTASSI REACT: m<img src={imgLogo} width="200" /> */-->
