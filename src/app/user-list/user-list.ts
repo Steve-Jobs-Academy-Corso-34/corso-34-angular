@@ -1,14 +1,20 @@
+/**
+ * ANGULAR: Lista utenti con *ngFor
+ * REACT: {users.map((user, index) => <div key={user.id}>...</div>)}
+ */
+
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '../../types/users';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule],
+  imports: [CommonModule], // Serve per *ngFor
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
 export class UserList {
+  // Array di utenti accessibile nel template
   users: User[] = [
     {
       id: 1,
@@ -47,6 +53,8 @@ export class UserList {
     },
   ];
 
+  // Ottimizza il rendering: identifica ogni elemento tramite id
+  // In React: key={user.id} nell'elemento mappato
   trackById(index: number, user: User): number {
     return user.id;
   }

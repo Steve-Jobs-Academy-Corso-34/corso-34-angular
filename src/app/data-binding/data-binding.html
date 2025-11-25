@@ -1,20 +1,82 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  DATA BINDING IN ANGULAR
+  ═══════════════════════════════════════════════════════════════════════
+
+  3 TIPI PRINCIPALI:
+
+  1. INTERPOLAZIONE {{ }}
+     Mostra valori/espressioni nel DOM
+     {{ text }} | {{ getText() }} | {{ sum(2, 3) }}
+
+  2. PROPERTY BINDING [ ]
+     Lega proprietà HTML/DOM a variabili del component
+     [src]="imgLogoSrc" | [disabled]="isDisabled" | [class]="myClass"
+
+  3. EVENT BINDING ( )
+     Ascolta eventi DOM e chiama metodi del component
+     (click)="onClick()" | (input)="onInput($event)" | (submit)="onSubmit()"
+
+  ═══════════════════════════════════════════════════════════════════════
+  CONFRONTO CON REACT
+  ═══════════════════════════════════════════════════════════════════════
+
+  Angular                          React
+  ─────────────────────────────────────────────────────────────────────
+  {{ value }}                      {value}
+  {{ getText() }}                  {getText()}
+  [src]="imgLogoSrc"               src={imgLogo}
+  (click)="onClick()"              onClick={onClick}
+  class="my-class"                 className="my-class"
+  [(ngModel)]="value"              value={value} onChange={e => setValue(e.target.value)}
+-->
+
 <h2>Data Binding in Angular</h2>
 
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 1. INTERPOLAZIONE {{ }} - Mostra valori nel template                -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- Esempio 1: Variabile semplice -->
+<!-- Angular: {{ text }}  |  React: {text} -->
 <p>Testo statico - {{ text }} -</p>
 
+<!-- Esempio 2: Chiamata metodo senza parametri -->
+<!-- Angular: {{ getText() }}  |  React: {getText()} -->
 <p>Testo statico da metodo - {{ getText() }} -</p>
 
+<!-- Esempio 3: Chiamata metodo con parametro stringa -->
+<!-- Angular: {{ getDynamicText('testo') }}  |  React: {getDynamicText('testo')} -->
 <p>Testo dinamico - {{ getDynamicText('testo dinamico') }} -</p>
 
+<!-- Esempio 4: Chiamata metodo con parametri numerici -->
+<!-- Angular: {{ sum(2, 3) }}  |  React: {sum(2, 3)} -->
 <p>Somma - {{ sum(2, 3) }} -</p>
 
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 2. PROPERTY BINDING [ ] - Lega proprietà DOM a valori component     -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- [src]="imgLogoSrc" lega dinamicamente l'attributo src -->
+<!-- Le quadre [] indicano binding unidirezionale: component -> template -->
+<!-- Angular: [src]="imgLogoSrc"  |  React: src={imgLogo} -->
 <img [src]="imgLogoSrc" width="200" />
 
+<!-- Interpolazione per mostrare il valore corrente -->
 <p>Path corrente: {{ imgLogoSrc }}</p>
 
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 3. EVENT BINDING ( ) - Gestisce eventi DOM                          -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- Le tonde () indicano binding unidirezionale: template -> component -->
+<!-- DIFFERENZA CHIAVE:
+     Angular: (click)="onClick()" - chiamata esplicita con ()
+     React:   onClick={onClick}   - riferimento senza () -->
 <div class="image-src-button-container">
+  <!-- onClick() modifica imgLogo -->
   <button (click)="onClick()">Spacca Immagine</button>
+
+  <!-- onReset() ripristina imgLogo -->
   <button (click)="onReset()">Resetta Immagine</button>
 </div>
-
-<!--/* SINTASSI REACT: m<img src={imgLogo} width="200" /> */-->

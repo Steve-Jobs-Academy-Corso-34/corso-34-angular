@@ -1,6 +1,12 @@
+<!--
+  *ngFor: cicla attraverso l'array
+  REACT: {users.map((user, index) => <div key={user.id}>...</div>)}
+-->
+
 <div class="user-list-container">
   <h2>Lista Utenti</h2>
   <div>
+    <!-- *ngFor itera su users, trackBy ottimizza il rendering -->
     <div *ngFor="let user of users; index as i; trackBy: trackById" class="user-card">
       <p>Index: {{ i }}</p>
       <p>{{ user.name }}</p>
