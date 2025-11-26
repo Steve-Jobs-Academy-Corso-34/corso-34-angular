@@ -1,0 +1,25 @@
+//USER CARD
+.user-card {
+  width: 400px;
+  color: #000;
+  background: #fff;
+
+  &, //user-card
+  &__delete-button {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  &__delete-button {
+    color: #fff;
+    background: rgb(255, 83, 83);
+
+    border: none;
+
+    cursor: pointer;
+
+    /* &:hover {
+      background: rgb(255, 51, 51);
+    } */
+  }
+}

@@ -6,10 +6,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '../../types/users';
+import { UserCard } from './user-card/user-card';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule], // Serve per *ngFor
+  imports: [CommonModule, UserCard], // CommonModule Serve per *ngFor
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
@@ -57,5 +58,9 @@ export class UserList {
   // In React: key={user.id} nell'elemento mappato
   trackById(index: number, user: User): number {
     return user.id;
+  }
+
+  deleteUser(userId: number) {
+    this.users = this.users.filter((user) => user.id !== userId);
   }
 }

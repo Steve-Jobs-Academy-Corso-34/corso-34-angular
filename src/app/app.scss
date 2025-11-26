@@ -1,0 +1,34 @@
+.nav {
+  display: flex;
+  gap: 12px;
+
+  margin-bottom: 20px;
+
+  .nav-link {
+    text-decoration: none;
+    color: #fff;
+
+    font-weight: bold;
+
+    transition: 0.3s all;
+
+    //.nav-link:hover
+    &:hover {
+      color: #000;
+    }
+
+    //.nav-link.active
+    &.active {
+      color: #000;
+    }
+  }
+}
+
+.nav,
+.main {
+  background: linear-gradient(to right, rgb(255, 69, 69), rgb(67, 67, 255));
+  padding: 12px;
+  border-radius: 8px;
+
+  color: #fff;
+}

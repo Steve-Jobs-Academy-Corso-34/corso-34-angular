@@ -1,17 +1,17 @@
+<nav class="nav">
+  <a
+    routerLink=""
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-link"
+    >Home</a
+  >
+  <a routerLink="users" routerLinkActive="active" class="nav-link">Users</a>
+  <a routerLink="data-binding" routerLinkActive="active" class="nav-link">Data Binding</a>
+  <a routerLink="directives" routerLinkActive="active" class="nav-link">Directives</a>
+</nav>
+
 <main class="main">
-  <!-- Data Binding: interpolazione {{ }}, property binding [ ], event binding ( ) -->
-  <!--/* REACT: <DataBinding/> */-->
-  <app-data-binding></app-data-binding>
-
-  <hr />
-
-  <!-- User List: iterazione con *ngFor e trackBy -->
-  <!--/* REACT: <UserList/> */-->
-  <app-user-list></app-user-list>
-
-  <hr />
-
-  <!-- Directives: *ngIf, *ngFor, [ngClass], [ngStyle] -->
-  <!--/* REACT: <Directives/> */-->
-  <app-directives></app-directives>
+  <!--/* ROUTER OUTLET */-->
+  <router-outlet></router-outlet>
 </main>

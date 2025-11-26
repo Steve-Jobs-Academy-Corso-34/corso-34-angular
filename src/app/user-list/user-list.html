@@ -4,16 +4,18 @@
 -->
 
 <div class="user-list-container">
-  <h2>Lista Utenti</h2>
-  <div>
-    <!-- *ngFor itera su users, trackBy ottimizza il rendering -->
-    <div *ngFor="let user of users; index as i; trackBy: trackById" class="user-card">
-      <p>Index: {{ i }}</p>
-      <p>{{ user.name }}</p>
-      <p>{{ user.surname }}</p>
-      <p>{{ user.email }}</p>
-      <p>{{ user.age }}</p>
-      <hr />
-    </div>
+  <h2 class="title">Lista Utenti</h2>
+
+  <div class="users-container">
+    <!--/* @if stampa gli utenti se users è pieno */-->
+    @if(users.length) {
+    <!-- @for itera su users, track ottimizza il rendering -->
+    @for (user of users; track user.id; let i = $index) {
+    <app-user-card [user]="user" (delete)="deleteUser($event)"></app-user-card>
+    } }
+    <!--/* se users è vuoto stampa il messaggio */-->
+    @else {
+    <p>Nessun utente disponibile.</p>
+    }
   </div>
 </div>

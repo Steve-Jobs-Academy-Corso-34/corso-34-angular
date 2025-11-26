@@ -1,11 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { DataBinding } from './data-binding/data-binding';
-import { Directives } from './directives/directives';
-import { UserList } from './user-list/user-list';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [DataBinding, UserList, Directives],
+  imports: [RouterModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
