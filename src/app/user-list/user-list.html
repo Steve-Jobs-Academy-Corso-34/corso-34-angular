@@ -6,11 +6,28 @@
 <div class="user-list-container">
   <h2 class="title">Lista Utenti</h2>
 
+  <div class="search">
+    <input type="text" placeholder="Cerca utente..." [(ngModel)]="search" class="search__input" />
+    <input
+      type="number"
+      placeholder="Filtra per età..."
+      [(ngModel)]="ageFilter"
+      class="search__input"
+    />
+    <p>
+      Ricerca: {{ search }}
+
+      @if(!!ageFilter) {
+      <span>di {{ ageFilter }} anni</span>
+      }
+    </p>
+  </div>
+
   <div class="users-container">
     <!--/* @if stampa gli utenti se users è pieno */-->
     @if(users.length) {
     <!-- @for itera su users, track ottimizza il rendering -->
-    @for (user of users; track user.id; let i = $index) {
+    @for (user of filteredUsers; track user.id; let i = $index) {
     <app-user-card [user]="user" (delete)="deleteUser($event)"></app-user-card>
     } }
     <!--/* se users è vuoto stampa il messaggio */-->

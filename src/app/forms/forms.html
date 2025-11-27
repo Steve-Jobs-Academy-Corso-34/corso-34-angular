@@ -1,0 +1,77 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <!--/* NAMEGROUP */-->
+  <div class="form-group">
+    <label>Name</label>
+    <!--/* CONTROL */-->
+    <input type="text" class="form-control" formControlName="name" placeholder="Enter your name" />
+
+    <span>
+      {{ reactiveForm.get('name')?.invalid ? '❌' : '✅' }}
+    </span>
+
+    <div *ngIf="reactiveForm.get('name')?.errors" class="text-error">
+      <small *ngFor="let error of reactiveForm.get('name')?.errors | keyvalue">
+        {{ error.key }}: {{ error.value | json }}
+      </small>
+    </div>
+
+    <!--/* <p>Your name is: {{ name }}</p> */-->
+  </div>
+
+  <hr />
+
+  <!--/* SURNAME GROUP */-->
+  <div class="form-group">
+    <label>Surname</label>
+    <!--/* CONTROL */-->
+    <input
+      type="text"
+      class="form-control"
+      formControlName="surname"
+      placeholder="Enter your surname"
+    />
+
+    <span>
+      {{ reactiveForm.get('surname')?.invalid ? '❌' : '✅' }}
+    </span>
+
+    <div *ngIf="reactiveForm.get('surname')?.errors" class="text-error">
+      <small *ngFor="let error of reactiveForm.get('surname')?.errors | keyvalue">
+        {{ error.key }}: {{ error.value | json }}
+      </small>
+    </div>
+
+    <!--/* <p>Your surname is: {{ surname }}</p> */-->
+  </div>
+
+  <hr />
+
+  <!--/* EMAIL GROUP */-->
+  <div class="form-group">
+    <label>Email</label>
+    <!--/* CONTROL */-->
+    <input
+      type="text"
+      class="form-control"
+      formControlName="email"
+      placeholder="Enter your email"
+    />
+
+    <span>
+      {{ reactiveForm.get('email')?.invalid ? '❌' : '✅' }}
+    </span>
+
+    <div *ngIf="reactiveForm.get('email')?.errors" class="text-error">
+      <small *ngFor="let error of reactiveForm.get('email')?.errors | keyvalue">
+        {{ error.key }}: {{ error.value | json }}
+      </small>
+    </div>
+
+    <!--/* <p>Your email is: {{ email }}</p> */-->
+  </div>
+
+  <hr />
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary" (click)="onReset()">Reset Fields</button>
+</form>
