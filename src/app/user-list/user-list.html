@@ -7,25 +7,18 @@
   <h2 class="title">Lista Utenti</h2>
 
   <div class="search">
-    <input
-      type="text"
-      placeholder="Cerca utente..."
-      [(ngModel)]="search"
-      class="search__input"
-      (input)="filter()"
-    />
+    <input type="text" placeholder="Cerca utente..." [(ngModel)]="search" class="search__input" />
     <input
       type="number"
       placeholder="Filtra per età..."
       [(ngModel)]="ageFilter"
       class="search__input"
-      (input)="filter()"
     />
     <p>
-      Ricerca: {{ search }}
+      Ricerca: {{ search() }}
 
-      @if(!!ageFilter) {
-      <span>di {{ ageFilter }} anni</span>
+      @if(!!ageFilter()) {
+      <span>di {{ ageFilter() }} anni</span>
       }
     </p>
   </div>

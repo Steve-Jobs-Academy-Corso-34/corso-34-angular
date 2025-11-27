@@ -4,7 +4,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { User } from '../../types/users';
 import { UserCard } from './user-card/user-card';
 import { FormsModule } from '@angular/forms';
@@ -19,22 +19,19 @@ import { UsersService } from '../../services/users.service';
 export class UserList {
   usersService = inject<UsersService>(UsersService);
 
-  search?: string;
-  ageFilter?: number;
+  search = signal<string>('');
+  ageFilter = signal<number | undefined>(undefined);
+
+  constructor() {
+    // Effetto per aggiornare la lista utenti quando search o ageFilter cambiano
+    effect(() => {
+      // Filtra gli utenti in base a search e ageFilter tramite usersService
+      this.usersService.filterUsers(this.search(), this.ageFilter());
+    });
+  }
 
   get users(): User[] {
     return this.usersService.users;
-  }
-
-  // Filtra gli utenti in base a search e ageFilter tramite usersService
-  filter() {
-    this.usersService.filterUsers(this.search, this.ageFilter);
-  }
-
-  // Ottimizza il rendering: identifica ogni elemento tramite id
-  // In React: key={user.id} nell'elemento mappato
-  trackById(index: number, user: User): number {
-    return user.id;
   }
 
   deleteUser(userId: number) {
