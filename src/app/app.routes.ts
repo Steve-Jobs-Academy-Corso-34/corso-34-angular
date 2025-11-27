@@ -4,6 +4,7 @@ import { DataBinding } from './data-binding/data-binding';
 import { Directives } from './directives/directives';
 import { Home } from './home/home';
 import { Forms } from './forms/forms';
+import { UserPage } from './user-page/user-page';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'users',
-    component: UserList,
+    component: UserPage,
   },
   {
     path: 'forms',
