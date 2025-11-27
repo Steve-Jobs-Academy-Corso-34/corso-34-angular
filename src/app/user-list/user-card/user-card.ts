@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { User } from '../../../types/users';
 
 @Component({
@@ -7,7 +7,7 @@ import { User } from '../../../types/users';
   templateUrl: './user-card.html',
   styleUrl: './user-card.scss',
 })
-export class UserCard {
+export class UserCard implements OnInit, OnDestroy {
   @Input() user: User = {
     id: 1,
     name: 'Mario',
@@ -17,6 +17,16 @@ export class UserCard {
   };
 
   @Output() delete = new EventEmitter<number>();
+
+  // Log di creazione del componente
+  ngOnInit() {
+    console.log(`UserCard di ${this.user.name} ${this.user.surname} creato`);
+  }
+
+  // Log di distruzione del componente
+  ngOnDestroy() {
+    console.log(`UserCard di ${this.user.name} ${this.user.surname} distrutto`);
+  }
 
   handleDelete() {
     this.delete.emit(this.user.id);

@@ -8,7 +8,7 @@ import { Component, inject } from '@angular/core';
 import { User } from '../../types/users';
 import { UserCard } from './user-card/user-card';
 import { FormsModule } from '@angular/forms';
-import { UsersService } from '../../services/users-service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-list',
