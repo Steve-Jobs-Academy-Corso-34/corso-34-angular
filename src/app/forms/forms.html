@@ -5,10 +5,12 @@
     <!--/* CONTROL */-->
     <input type="text" class="form-control" formControlName="name" placeholder="Enter your name" />
 
+    <!--/* VALID / INVALID ICON */-->
     <span>
       {{ reactiveForm.get('name')?.invalid ? '❌' : '✅' }}
     </span>
 
+    <!--/* INVALID MESSAGES */-->
     <div *ngIf="reactiveForm.get('name')?.errors" class="text-error">
       <small *ngFor="let error of reactiveForm.get('name')?.errors | keyvalue">
         {{ error.key }}: {{ error.value | json }}

@@ -1,0 +1,14 @@
+<div class="behavior-subject-container">
+  <h1>Behavior Subject Example</h1>
+
+  <div class="input-group">
+    <label for="newValue">Nuovo Valore:</label>
+    <input id="newValue" type="text" [(ngModel)]="newValue" />
+    <button (click)="setMessage()">Aggiorna Valore</button>
+  </div>
+
+  <div class="current-value">
+    <h2>Valore Corrente nel Behavior Subject (message$):</h2>
+    <p>{{ message || 'null' }}</p>
+  </div>
+</div>

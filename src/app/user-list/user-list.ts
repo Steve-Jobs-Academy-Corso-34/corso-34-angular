@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, signal, effect, computed } from '@angular/core';
 import { User } from '../../types/users';
 import { UserCard } from './user-card/user-card';
 import { FormsModule } from '@angular/forms';

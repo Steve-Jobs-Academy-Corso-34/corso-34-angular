@@ -4,6 +4,7 @@ import { Directives } from './directives/directives';
 import { Home } from './home/home';
 import { Forms } from './forms/forms';
 import { UserPage } from './user-page/user-page';
+import { BehaviorSubjectPage } from './behavior-subject-page/behavior-subject-page';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'directives',
     component: Directives,
+  },
+  {
+    path: 'behavior-subject',
+    component: BehaviorSubjectPage,
   },
 ];

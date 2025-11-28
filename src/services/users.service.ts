@@ -10,6 +10,7 @@ export class UsersService {
   baseUsers: User[] = [];
 
   users = signal<User[]>([]);
+  //const [users, setUsers] = useState<User[]>([]) in React;
 
   /**
    * Costruttore che inizializza il servizio con la dipendenza del client HTTP e carica gli utenti.
@@ -26,7 +27,7 @@ export class UsersService {
   fetchUsers() {
     this.http.get<User[]>('https://jsonplaceholder.typicode.com/users').subscribe((users) => {
       this.baseUsers = users;
-      this.users.set(users);
+      this.users.set(users); //setUsers(users) in React;
     });
   }
 
@@ -39,7 +40,9 @@ export class UsersService {
 
     const searchLower = (search || '').toLowerCase().trim();
 
+    // Setta gli utenti filtrati
     this.users.set(
+      // Filtra gli utenti il cui nome o email contiene la stringa di ricerca
       this.baseUsers.filter(
         (user) =>
           user.name.toLowerCase().includes(searchLower) ||
