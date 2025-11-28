@@ -8,19 +8,6 @@
 
   <div class="search">
     <input type="text" placeholder="Cerca utente..." [(ngModel)]="search" class="search__input" />
-    <input
-      type="number"
-      placeholder="Filtra per età..."
-      [(ngModel)]="ageFilter"
-      class="search__input"
-    />
-    <p>
-      Ricerca: {{ search() }}
-
-      @if(!!ageFilter()) {
-      <span>di {{ ageFilter() }} anni</span>
-      }
-    </p>
   </div>
 
   <div class="users-container">

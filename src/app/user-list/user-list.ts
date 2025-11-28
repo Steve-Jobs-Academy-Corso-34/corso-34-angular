@@ -1,8 +1,3 @@
-/**
- * ANGULAR: Lista utenti con *ngFor
- * REACT: {users.map((user, index) => <div key={user.id}>...</div>)}
- */
-
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal, effect } from '@angular/core';
 import { User } from '../../types/users';
@@ -12,29 +7,36 @@ import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, UserCard, FormsModule], // CommonModule Serve per *ngFor
+  imports: [CommonModule, UserCard, FormsModule],
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
 export class UserList {
+  // Inietta il service degli utenti tramite Dependency Injection
   usersService = inject<UsersService>(UsersService);
 
+  // Signal che contiene il testo della ricerca
   search = signal<string>('');
-  ageFilter = signal<number | undefined>(undefined);
 
   constructor() {
-    // Effetto per aggiornare la lista utenti quando search o ageFilter cambiano
+    // Effect che si attiva quando search cambia, filtra automaticamente gli utenti
     effect(() => {
-      // Filtra gli utenti in base a search e ageFilter tramite usersService
-      this.usersService.filterUsers(this.search(), this.ageFilter());
+      this.usersService.filterUsers(this.search());
     });
   }
 
+  // Getter per accedere agli utenti dal service
   get users(): User[] {
-    return this.usersService.users;
+    return this.usersService.users();
   }
 
+  // Ricarica la lista degli utenti
+  fetchUsers() {
+    this.usersService.fetchUsers();
+  }
+
+  // Elimina un utente, riceve l'ID dal componente figlio UserCard
   deleteUser(userId: number) {
-    this.usersService.users = this.usersService.users.filter((user) => user.id !== userId);
+    this.usersService.deleteUser(userId);
   }
 }

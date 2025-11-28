@@ -1,75 +1,61 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { User } from '../types/users';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   // Array di utenti accessibile nel template
-  baseUsers: User[] = [
-    {
-      id: 1,
-      name: 'Michele',
-      surname: 'Tornello',
-      age: 24,
-      email: 'michele@example.com',
-    },
-    {
-      id: 2,
-      name: 'Michele',
-      surname: 'Rossi',
-      age: 24,
-      email: 'luca@example.com',
-    },
-    {
-      id: 3,
-      name: 'Anna',
-      surname: 'Bianchi',
-      age: 24,
-      email: 'anna@example.com',
-    },
-    {
-      id: 4,
-      name: 'Giovanni',
-      surname: 'Verdi',
-      age: 24,
-      email: 'giovanni@example.com',
-    },
-    {
-      id: 5,
-      name: 'Giulia',
-      surname: 'Neri',
-      age: 30,
-      email: 'giulia@example.com',
-    },
-  ];
+  baseUsers: User[] = [];
 
-  users: User[] = [...this.baseUsers];
+  users = signal<User[]>([]);
 
-  filterUsers(search?: string, ageFilter?: number) {
-    // se search e ageFilter sono undefined ritorna users
-    if (!search && ageFilter == undefined) {
-      this.users = this.baseUsers;
+  /**
+   * Costruttore che inizializza il servizio con la dipendenza del client HTTP e carica gli utenti.
+   * Recupera automaticamente gli utenti quando il servizio viene istanziato.
+   *
+   * @param http - Il client HTTP per effettuare richieste API
+   */
+  constructor(private http: HttpClient) {
+    // Carica gli utenti all'inizializzazione del servizio
+    this.fetchUsers();
+  }
+
+  // Funzione per ottenere gli utenti da un'API esterna
+  fetchUsers() {
+    this.http.get<User[]>('https://jsonplaceholder.typicode.com/users').subscribe((users) => {
+      this.baseUsers = users;
+      this.users.set(users);
+    });
+  }
+
+  // Funzione per filtrare gli utenti in base a una stringa di ricerca
+  filterUsers(search?: string) {
+    // se search è undefined fa il set di users da baseUsers
+    if (!search) {
+      this.users.set(this.baseUsers);
     }
 
     const searchLower = (search || '').toLowerCase().trim();
 
-    this.users = this.baseUsers.filter(
-      (user) =>
-        (user.name.toLowerCase().includes(searchLower) ||
-          user.surname.toLowerCase().includes(searchLower) ||
-          user.email.toLowerCase().includes(searchLower)) &&
-        // se ageFilter è undefined (non ha valore) è true,
-        // se è definito la condizione (this.ageFilter == undefined) è false
-        // se è false filtra l'utente per età
-        (ageFilter == undefined || user.age === ageFilter)
-
-      // ALTERNATIVA PIÙ LUNGA:
-      /* if(this.ageFilter == undefined){
-          return true
-        } else{
-          return user.age === this.ageFilter
-        } */
+    this.users.set(
+      this.baseUsers.filter(
+        (user) =>
+          user.name.toLowerCase().includes(searchLower) ||
+          user.email.toLowerCase().includes(searchLower)
+      )
     );
+  }
+
+  // Funzione per aggiornare la lista degli utenti
+  setUsers(users: User[]) {
+    this.users.set(users);
+  }
+
+  // Funzione per eliminare un utente in base al suo ID
+  deleteUser(userId: number) {
+    this.baseUsers = this.baseUsers.filter((user) => user.id !== userId);
+    this.users.set(this.baseUsers);
   }
 }
